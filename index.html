@@ -1,7 +1,500 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <meta charset="UTF-8"><!DOCTYPE html>
+<html lang="id">
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Widyatha Dian Reswitha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        /* --- RESET & GLOBAL --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Menu Desktop */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* Tombol Hamburger (Hidden di Desktop) */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* --- HERO SECTION --- */
+        #home {
+            min-height: 100vh; /* Menggunakan min-height agar fleksibel */
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--light-bg) 50%, #e9ecef 50%);
+            padding-top: 80px; /* Space untuk navbar */
+            padding-bottom: 50px;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        .hero-text { flex: 1; }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin-bottom: 10px; /* Jaga-jaga kalau tombol turun baris */
+        }
+
+        .btn:hover { background: var(--accent-color); }
+
+        .hero-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-img img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid var(--white);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section { padding: 80px 0; }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 10px auto;
+        }
+
+        /* --- ABOUT --- */
+        #about { background: var(--white); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        .info-item { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .info-item strong { color: var(--primary-color); display: inline-block; min-width: 120px; }
+
+        /* --- EXPERIENCE (TIMELINE) --- */
+        #experience { background: var(--light-bg); }
+        .timeline {
+            max-width: 800px;
+            margin: auto;
+        }
+        .timeline-item {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.2s;
+        }
+        .timeline-item:hover { transform: translateX(5px); }
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .timeline-company {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* --- ACHIEVEMENTS (GRID) --- */
+        #achievements { background: var(--white); }
+        .grid-cards {
+            display: grid;
+            /* Menggunakan 280px agar pas di HP kecil */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: var(--white);
+            border: 1px solid #eee;
+            padding: 25px;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%; /* Agar tinggi kartu sama */
+        }
+        .card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .card-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        .card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--primary-color); }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 0;
+        }
+        .social-icons { margin: 20px 0; }
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.2rem;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        .social-icons a:hover { 
+            background: var(--accent-color); 
+            transform: scale(1.1);
+        }
+
+        /* --- RESPONSIVE / MOBILE CSS --- */
+        @media (max-width: 768px) {
+            /* Navbar Mobile */
+            .hamburger { display: block; }
+            
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                border-top: 1px solid #eee;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-links.active {
+                max-height: 300px; /* Tinggi menu saat dibuka */
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links li { width: 100%; text-align: center; }
+            
+            .nav-links a {
+                display: block;
+                padding: 15px;
+                width: 100%;
+            }
+
+            /* Hero Section Mobile */
+            #home {
+                background: var(--light-bg); /* Hapus gradient miring di HP biar rapi */
+                text-align: center;
+                padding-top: 100px;
+            }
+            .hero-content { flex-direction: column-reverse; }
+            
+            .hero-text h1 { font-size: 2rem; }
+            .hero-text h2 { font-size: 1.2rem; }
+            
+            .hero-img img {
+                width: 250px;
+                height: 250px;
+            }
+
+            /* Sections Mobile */
+            section { padding: 50px 0; }
+            .section-title { font-size: 1.75rem; margin-bottom: 30px; }
+            
+            /* About Mobile */
+            .about-grid { grid-template-columns: 1fr; gap: 20px; }
+            
+            /* Buttons */
+            .btn { width: 100%; margin-bottom: 10px; margin-left: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">Widyatha D.R.</div>
+            
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="navMenu">
+                <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                <li><a href="#about" onclick="toggleMenu()">Tentang</a></li>
+                <li><a href="#experience" onclick="toggleMenu()">Pengalaman</a></li>
+                <li><a href="#achievements" onclick="toggleMenu()">Prestasi</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Widyatha Dian Reswitha</h1>
+                <h2>Sarjana Peternakan | Researcher</h2>
+                <p>
+                    Lulusan Universitas Brawijaya dengan predikat <strong>Sangat Memuaskan (IPK 3.81)</strong>. 
+                    Berpengalaman dalam riset peternakan, manajemen organisasi, dan kompetisi ilmiah tingkat nasional & internasional.
+                </p>
+                <a href="mailto:widyathadian9e@gmail.com" class="btn">Hubungi Saya</a>
+                <a href="Widyatha Dian Reswitha .pdf" class="btn" style="background-color: #555; margin-left: 10px;">Download CV</a>
+            </div>
+            <div class="hero-img">
+                <img src="WhatsApp Image 2025-12-07 at 13.13.57_f0a19eda.jpg" alt="Foto Widyatha Dian Reswitha">
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="about-grid">
+                <div>
+                    <p>
+                        Saya adalah Sarjana Peternakan yang lulus pada Februari 2025. Saya memiliki passion yang kuat dalam 
+                        pengembangan industri peternakan, riset ilmiah, dan manajemen proyek. 
+                        Terbiasa bekerja secara kolaboratif, memimpin tim, dan adaptif terhadap lingkungan baru.
+                    </p>
+                    <br>
+                    <p>
+                        <strong>Keahlian Utama:</strong><br>
+                        Manajemen Ternak, Riset Ilmiah (PKM), Public Speaking, Leadership, Microsoft Office, Manajemen Event.
+                    </p>
+                </div>
+                <div>
+                    <div class="info-item"><strong>Pendidikan:</strong> Universitas Brawijaya</div>
+                    <div class="info-item"><strong>Jurusan:</strong> Sarjana Peternakan</div>
+                    <div class="info-item"><strong>IPK:</strong> 3.81 / 4.00</div>
+                    <div class="info-item"><strong>Domisili:</strong> Kota Bekasi, Indonesia</div>
+                    <div class="info-item"><strong>Sertifikasi:</strong> Ms. Office Desktop Application</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Pengalaman & Organisasi</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Juli - Agustus 2024</div>
+                    <h3 class="timeline-title">Internship (PKL)</h3>
+                    <div class="timeline-company">CV. Sinar Mentari Group Blitar</div>
+                    <p>Mengidentifikasi kesehatan ternak, mencatat pemberian pakan, serta mengamati manajemen produksi pakan ruminansia dari input hingga output.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Februari 2023 - Juni 2024</div>
+                    <h3 class="timeline-title">Asisten Praktikum</h3>
+                    <div class="timeline-company">Universitas Brawijaya</div>
+                    <p>Asisten untuk mata kuliah Industri Ternak Perah, Teknologi Pakan, dan Anatomi Fisiologi. Membimbing mahasiswa dan memberikan materi praktikum.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Maret - Desember 2023</div>
+                    <h3 class="timeline-title">Manajer Dept. Research and Development</h3>
+                    <div class="timeline-company">LOKM Garis Pena - UB</div>
+                    <p>Mengelola 3 program kerja, membina pengembangan anggota, dan menyelenggarakan lomba tingkat nasional.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Maret 2022 - Feb 2023</div>
+                    <h3 class="timeline-title">Staff Ahli Pusat Jaminan Mutu</h3>
+                    <div class="timeline-company">Eksekutif Keluarga Mahasiswa Fapet UB</div>
+                    <p>Melakukan pengawasan dan evaluasi kinerja kepengurusan divisi serta berkontribusi dalam rekrutmen anggota.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="container">
+            <h2 class="section-title">Prestasi & Penghargaan</h2>
+            <div class="grid-cards">
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-medal"></i></div>
+                    <h3>Silver Medal International (IIASPO)</h3>
+                    <p>Desember 2024. Inovasi "Optimizing Maggot Growth Through Utilization of Chicken Manure".</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3>Mahasiswa Berprestasi Utama</h3>
+                    <p>Maret 2024. Universitas Brawijaya PSDKU Kediri.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                    <h3>1st Runner Up Business Plan</h3>
+                    <p>Nov 2023. Universitas Jenderal Soedirman. Karya: "HaloPet, Mobile Apps Based Livestock Consulting".</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-award"></i></div>
+                    <h3>Peraih Insentif PKM-GFT</h3>
+                    <p>2022. Direktorat Jenderal Pendidikan Tinggi Riset dan Teknologi.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-book"></i></div>
+                    <h3>Juara Kepenulisan</h3>
+                    <p>7+ Juara Kepenulisan Tingkat Nasional dan Internasional lainnya.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <h3>Widyatha Dian Reswitha</h3>
+            <p>Terbuka untuk peluang kerja dan kolaborasi riset.</p>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/Dianreswitha" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:widyathadian9e@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/6281298548017" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 Widyatha Dian Reswitha. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Widyatha Dian Reswitha</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -383,7 +876,7 @@
                 <a href="https://wa.me/6281298548017"><i class="fab fa-whatsapp"></i></a>
             </div>
             <br>
-            <p>&copy; 2025 Widyatha Dian Reswitha. All Rights Reserved.</p>
+            <p>&copy; 2025 Andara Ahmad Habibie. All Rights Reserved.</p>
         </div>
     </footer>
 
